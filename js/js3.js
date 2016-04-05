@@ -10,12 +10,16 @@ L.tileLayer(basemapUrl,{
     attribution: attribution
   }).addTo(map);
 
+//basic structure of code borrowed from: http://jsfiddle.net/km5H9/1/
+
+
+//locate markers and add in Steet View images
 var QueensWay1 = L.marker([40.71161371303385, -73.85722160339355]).addTo(map).bindPopup('<img src="img/entry1.png" rel="#test1" alt="" width="300px">'),
     QueensWay2 = L.marker([40.719778223045275, -73.85769367218016]).addTo(map).bindPopup('<img src="img/entry3.png" rel="#test1" alt="" width="300px">'),
     QueensWay3 = L.marker([40.721632175452626, -73.85786533355713]).addTo(map).bindPopup('<img src="img/entry2.png" rel="#test1" alt="" width="300px">'),
     FMCP       = L.marker([40.727453900822795, -73.83520603179932]).addTo(map).bindPopup('<img src="img/flushingentrance.png" rel="#test1" alt="" width="300px">');
 
-
+//define geojson alternate routes
 var geojson = {
     "type": "FeatureCollection",
         "features": [{
@@ -117,6 +121,7 @@ var geojson3 = {
     }]
 }
 
+//SetStyles
 var myStyle = {
  "color": "#00FF00",
  "weight": 2,
@@ -141,7 +146,7 @@ var QWStyle = {
  "opacity": 0.65
 };
 
-
+//get & style geojson from external files
 $.getJSON('data/nyc-bike-routes-2015.geojson', function(bike_route) {
     geojson = L.geoJson(bike_route,{
            style: myStyle,
@@ -166,7 +171,7 @@ $.getJSON('data/routealt.geojson', function(park2) {
   }).addTo(map);
 });
 
-
+//set layer control
 L.control.layers({
     'CDB': L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png').addTo(map)
 }, {
